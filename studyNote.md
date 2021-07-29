@@ -264,3 +264,115 @@ os.remove("test1.txt")
 
 ## 二、Python爬虫
 
+### 1. 任务介绍
+
+> 爬取豆瓣电影tpo250的基本信息，https://movie.douban.com/top250
+>
+> 包括电影的 名称、豆瓣得分、评价数、电影概况、电影链接等
+
+### 2. 爬虫初识
+
+网络爬虫，是按照**一定规则**，**自动抓取**互联网信息的程序或者脚本。能通过浏览器访问的数据都可以通过爬虫获取。
+
+蜘蛛从索引区出发爬取网页，将爬取到的网页存放到临时库中进行处理，临时库符合规则就进入索引区，在索引区中进行分类、归档、排序，然后将结果反馈给用户。
+
+### 3. 基本流程
+
+$\bigstar$​ ​**准备工作**
+
+通过浏览器查看分析目标网页，学习编程基础规范
+
+$\bigstar$ **获取数据**
+
+通过http库向目标站点发起请求，请求可以包含额外的header等信息，如果服务器能正常响应，会得到一个response，便是索要获取的页面内容
+
+$\bigstar$ **解析内容**
+
+得到的内容可能是html、json等格式，可以用页面解析库、正则表达式等进行解析
+
+$\bigstar$ **保存数据**
+
+保存形式多样，可以存为文本，也可以保存到数据库，或者保存特定格式的文件
+
+#### a.准备工作
+
+`https://movie.douban.com/top250?start=100&filter=`
+
+页面包括250条数据，每页25条，start=0,25,50...225
+
+F12进入开发者模式，左上角箭头小标题
+
+当你在凝视深渊时，深渊也在凝视你
+
+user-agent ：表明我们是什么版本的浏览器
+
+cookie：很重要，爬取登录以后操作的信息
+
+**编码规范：**
+
+1、一般python程序中第一行需要加入 `-*-coding: utf-8-*-或者coding =utf-8`
+
+2、多用函数 def，提高可读性和代码重复利用率
+
+3、加入main函数用于测试程序 `if __name__ == "__main__":`
+
+**引入模块：**
+
+模块 module ：用来从逻辑上组织python代码（变量、函数、类），本质就是py文件，提高代码的可维护性
+
+VScode中要将模块放在相同文件夹下
+
+```python
+import urllib.request,urllib.error #制定url，获取网页数据
+from bs4 import BeautifulSoup #网页解析，获取数据
+import re #正则表达式，进行文字匹配
+import xlwt #进行excel操作
+import sqlite3 #进行SQLite数据库操作
+```
+
+- 下载库要进入到3.9版本的Scripts
+
+<img src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210728150808970.png" alt="image-20210728150808970" style="zoom:67%;" />
+
+```python
+def main():
+#1.爬取网页
+    base_url = "https://movie.douban.com/top250?start="
+
+    datalist = get_Data(base_url)
+    save_path = ".\\豆瓣电影TPO250.xls"
+
+#2.解析数据
+def get_Data(base_url):
+    datalist = []
+    #逐一解析数据
+    return datalist
+
+ #3.保存数据
+def save_Data(save_path):
+    print("save...")
+
+if __name__ == "__main__": #当程序执行时
+#调用函数    
+    main()
+```
+
+#### b. 获取数据
+
+- 扩展内容：urllib
+
+http://httpbin.org/
+
+获取get请求
+
+获取post请求
+
+超时处理
+
+当`response.status` 为418时，对方已经发现你在爬虫
+
+#### c. 解析内容
+
+- 扩展内容bs4
+
+文档搜索、文档遍历
