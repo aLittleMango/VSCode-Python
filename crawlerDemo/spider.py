@@ -17,7 +17,6 @@ def main():
 
 
 #1.爬取网页
-
 def get_Data(base_url):
     datalist = []
     for i in range(0,10):   #获取页面信息，10页250个
