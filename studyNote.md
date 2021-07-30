@@ -376,3 +376,87 @@ http://httpbin.org/
 - 扩展内容bs4
 
 文档搜索、文档遍历
+
+- 扩展内容 re模块
+
+| 操作符 | 说明                             | 实例                                    |
+| ------ | -------------------------------- | --------------------------------------- |
+| .      | 表示任何单个字符                 |                                         |
+| [ ]    | 字符集，对单个字符给出的取值范围 | [abc]表示a、b、c，[a-z]表示a到z单个字符 |
+| [^ ]   | 非字符集，对单个字符给出排除范围 | [^abc]表示非a或b或c的单个字符           |
+| *      | 前一个字符0次或者无限次扩展      | abc* 表示ab、abc、abccc等               |
+| +      | 前一个字符1次或者无限次扩展      | abc+ 表示 abc、abccccc等                |
+| ?      | 前一个字符0次或者1次扩展         | abc？表示ab、abc                        |
+| \|     | 左右表达式任意一个               | abc\|def 表示abc、def                   |
+| {m}    | 扩展前一个字符m次                | ab{2}c 表示abbc                         |
+| {m,n}  | 扩展前一个字符m至n次（含n）      | ab{1，2}c 表达abc、abbc                 |
+| ^      | 匹配字符串开头                   | ^abc 表示abc且在一个字符串的开头        |
+| $      | 匹配字符串结尾                   | abc$ 表示abc且在一个字符串的结尾        |
+| ( )    | 分组标记，内部只能使用\|操作符   |                                         |
+| \d     | 数字，等价于[0-9]                |                                         |
+| \w     | 单词字符，等价于[A-Z a-z 0-9]    |                                         |
+
+re库主要功能函数
+
+| 函数              | 说明                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| **re.search( )**  | 扫描整个字符串并返回第一个成功的匹配                         |
+| **re.match( )**   | 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none |
+| **re.findall( )** | 在字符串中找到正则表达式所匹配的所有子串，并返回一个列表，如果没有找到匹配的，则返回空列表 |
+| re.split( )       | 将一个字符串按照正则表达式匹配结果进行分割，返回列表类型     |
+| re.finditer( )    | 和findall类似，在字符串中找到正则表达式所匹配的所有子串，并返回一个迭代器，每个迭代元素是match对象 |
+| **re.sub( )**     | 在一个字符串中替换所有匹配正则表达式的子串，返回替换后的字符串 |
+
+控制匹配模式
+
+| 修饰符 | 描述                                             |
+| ------ | ------------------------------------------------ |
+| re.l   | 使匹配对大小写不敏感                             |
+| re.L   | 做本地化识别（locale-aware）匹配                 |
+| re.M   | 多行匹配，影响 ^ 和 $                            |
+| re.S   | 使.匹配包括换行在内的所有字符                    |
+| re.U   | 根据Unicode字符集解析字符                        |
+| re.X   | 给予你更灵活的格式以便将正则表达式写得更易于理解 |
+
+对爬取的htm文件解析解析
+
+**标签解析**
+
+<img src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210729105242932.png" alt="image-20210729105242932" style="zoom:67%;" />
+
+**正则提取**
+
+```python
+findLink = re.compile(r'<a href="(.*?)">')  #影片详情链接
+findImgSrc = re.compile(r'<img.*src="(.*?)"',re.S) #影片的图片
+findTitle = re.compile(r'<span class="title">(.*)</span>')
+findRating = re.compile(r'<span class="rating_num" property="v:average">(.*)</span>')
+findJudge = re.compile(r'<span>(\d*)人评价</span>')
+findInq = re.compile(r'<span class="inq">(.*)</span>')
+findBd = re.compile(r'<p class="">(.*)</p>',re.S)
+```
+
+#### d.保存数据
+
+excel表储存
+
+![image-20210729171949100](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210729171949100.png)
+
+sqlite3 数据库保存
+
+# 三、数据可视化
+
+## 1.Flash入门
+
+- 做网站
+
+## 2.Echarts应用
+
+- 开源的图标框架
+
+## 3.WordCloud应用
+
+- 图片显示字词
+
+## 4.项目说明
+
