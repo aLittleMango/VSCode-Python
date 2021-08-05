@@ -446,17 +446,33 @@ sqlite3 数据库保存
 
 # 三、数据可视化
 
-## 1.Flash入门
+## 1.Flask入门
 
-- 做网站
+- flask 是一个轻量级的web 应用程序开发 Python 框架,
+- http请求，访问
+- flask框架的核心就是werkzeug和jinja2包装响应 
+
+为了避免重复造轮子（稍微了解一下就行
+
+**flask补充知识**
+
+- 路由路径不能重复，用户通过唯一路径访问特定的函数
+- render_template 渲染模板
+- html代码
+
+iconfont
 
 ## 2.Echarts应用
 
 - 开源的图标框架
 
+官网下载就可以用
+
+
+
 ## 3.WordCloud应用
 
-- 图片显示字词
+- 词云，图片显示字词
 
 ## 4.项目说明
 

@@ -2,7 +2,7 @@
 Description: 
 Author: aLittleMango
 Date: 2021-07-28 15:16:32
-LastEditTime: 2021-07-30 17:06:07
+LastEditTime: 2021-08-04 11:28:59
 FilePath: \VSCode-Python\crawlerDemo\spider.py
 '''
 
@@ -22,6 +22,8 @@ def main():
     
     #保存到数据库
     dbpath = "movie.db"
+    save_path = "movie.xls"
+    save_Data(datalist, save_path)
     save_Data2DB(datalist, dbpath)
 
 
@@ -38,14 +40,14 @@ findBd = re.compile(r'<p class="">(.*?)</p>', re.S)  #影片其他信息
 findDir = re.compile(r'导演: (.*)主演')  #导演
 findActor = re.compile(r'主演: (.*).<br/>', re.S)  #主演
 findYear = re.compile(r'<br/> ([0-9]+) ', re.S)  #年份
-findCountry = re.compile(r'[0-9] / (.*) / ')  #国家
+findCountry = re.compile(r'<br/> [0-9]+ / (.*) / ')  #国家
 findType = re.compile(r'[0-9] / .* / (.*)</p> <div class="star">')
 
 
 #1.爬取网页
 def get_Data(base_url):
     datalist = []
-    for i in range(0, 10):  #获取页面信息，10页250个 #先只打印一页
+    for i in range(0, 10):  #获取页面信息,10页250个 #先只打印一页
         url = base_url + str(i * 25)
         html = ask_URL(url)  #保存获取到的网页源码
 
@@ -71,7 +73,7 @@ def get_Data(base_url):
                 data.append(otitle)
             else:
                 data.append(titles[0])
-                data.append(" ")  #如果没有，外文名留空
+                data.append(" ")  #如果没有,外文名留空
 
             rating = re.findall(findRating, item)[0]
             data.append(rating)
@@ -105,7 +107,7 @@ def get_Data(base_url):
                 year = year[0].replace("。", "")
                 data.append(year)
             else:
-                data.append(" ")
+                data.append("0")
 
             country = re.findall(findCountry, item)
             if len(country) != 0:
@@ -134,7 +136,7 @@ def ask_URL(url):
     head = {
         "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
-    }  #作用：伪装，发送请求时让服务器端认为我是浏览器而不是爬虫
+    }  #作用：伪装,发送请求时让服务器端认为我是浏览器而不是爬虫
     req = urllib.request.Request(url=url, headers=head)  #封装好的request对象去请求网址
     html = ""
     try:
@@ -148,7 +150,7 @@ def ask_URL(url):
     return html
 
 
-#3.保存数据
+#3.保存数据到xls
 def save_Data(datalist, save_path):
     print("save...")
     book = xlwt.Workbook(encoding='utf-8', style_compression=0)
@@ -162,9 +164,9 @@ def save_Data(datalist, save_path):
         data = datalist[i]
         for j in range(0, 12):
             sheet.write(i + 1, j, data[j])
-    book.save('Test.xls')
+    book.save(save_path)
 
-
+#3.保存数据到db
 def save_Data2DB(datalist, dbpath):
     init_db(dbpath)
     conn = sqlite3.connect(dbpath)
@@ -176,8 +178,9 @@ def save_Data2DB(datalist, dbpath):
             data[index] = '"'+data[index]+'"'
         sql = '''
                 insert into movie250
-                (info_link,pic_link,cname,ename,score,rate,intro,director,actor,year,country,type)
-                values(%s)'''%",".join(data)
+                (info_link,pic_link,cname,ename,score,rate,intro,director,actor,year,country,type)values(%s)
+                '''%(",".join(data))
+        print(sql)
         cur.execute(sql)
         conn.commit()
     cur.close()
