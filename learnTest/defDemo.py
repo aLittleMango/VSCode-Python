@@ -2,7 +2,7 @@
 Description: 
 Author: aLittleMango
 Date: 2021-07-22 09:32:02
-LastEditTime: 2021-07-22 16:32:25
+LastEditTime: 2021-08-06 15:06:22
 FilePath: \VSCode-Python\learnTest\defDemo.py
 '''
 
@@ -36,5 +36,4 @@ def test2():
 
 test1()
 test2()
-
 

@@ -2,7 +2,7 @@
 Description: 
 Author: aLittleMango
 Date: 2021-08-03 20:30:32
-LastEditTime: 2021-08-04 11:36:45
+LastEditTime: 2021-08-05 13:14:18
 FilePath: \VSCode-Python\flaskDemo\app.py
 '''
 from flask import Flask,render_template
@@ -34,7 +34,26 @@ def movie():
 
 @app.route('/score')
 def score():
-    return render_template("score.html")
+    score = []
+    num = []
+    country = []
+    num2 = []
+    con = sqlite3.connect("movie.db")
+    cur = con.cursor()
+    sql1 = "select score,count(score) from movie250 group by score"
+    sql2 = "select year,count(year) from movie250 group by year"
+    data = cur.execute(sql1)
+    for item in data:
+        score.append(item[0])
+        num.append(item[1])
+
+    data2 = cur.execute(sql2)
+    for item2 in data2:
+        country.append(item2[0])
+        num2.append(item2[1])
+    cur.close()
+    con.close()
+    return render_template("score.html",score = score,num = num,country = country,num2 = num2)
 
 @app.route('/word')
 def word():
