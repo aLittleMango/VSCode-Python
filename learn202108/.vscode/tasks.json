@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "python",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"${file}"
+			],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"env": {
+					"PYTHONIOENCODING": "UTF-8"
+				}
+			}
+		}
+	]
+}

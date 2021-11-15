@@ -1,22 +1,17 @@
 {
     "version": "0.2.0",
     "configurations": [
-    
         {
-            "name": "Python Console App",
-            "type": "python",
+            "name": "Python: Current File",
+            "type": "Python",
             "request": "launch",
-            "stopOnEntry": true,
+            "stopOnEntry": false,
             "program": "${file}",
-            "externalConsole": true,
-            "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit"
-            ],
-            "env": {"PYTHONPATH": "${workspaceRoot}"},
-            "envFile": "${workspaceRoot}/.env",
-            "console":"integratedTerminal",
-            "python": "${command:python.interpreterPath}"
-        }
+            "console": "integratedTerminal",
+            "args": [
+                "param_one",
+                "param_twe"
+            ]
+        },
     ]
 }

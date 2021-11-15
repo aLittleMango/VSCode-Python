@@ -1,0 +1,18 @@
+{
+    // tensorflow 路径配置
+    "python.pythonPath": "D:\\Anaconda3\\envs\\tensorflow\\python.exe",
+    "python.autoComplete.extraPaths": [
+        "D:\\Anaconda3\\envs\\tensorflow",
+        "D:\\Anaconda3\\envs\\tensorflow\\Lib\\site-packages",
+        "D:\\Python39\\Lib\\site-packages"
+    ],
+    "python.autoComplete.addBrackets": true,
+    "python.formatting.provider": "black",
+    "typescript.tsdk": "",
+    "python.analysis.extraPaths": [
+        "D:\\Anaconda3\\envs\\tensorflow",
+        "D:\\Anaconda3\\envs\\tensorflow\\Lib\\site-packages",
+        "D:\\Python39\\Lib\\site-packages"
+    ],
+    "python.analysis.completeFunctionParens": true
+}
